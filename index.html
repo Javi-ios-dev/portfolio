@@ -1,1 +1,272 @@
-hola
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Javier Apaez Arcos — iOS Developer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      /* Pleasant dark-ish theme based on your reference color */
+      --bg: #2b2f36;         /* page background */
+      --card: #3a3f47;       /* cards */
+      --ink: #f5f5f5;        /* main text */
+      --muted: #c0c4cc;      /* secondary text */
+      --brand: #4ea3ff;      /* links */
+      --line: #4b5058;       /* borders */
+      --pill: #444a52;       /* skill pills */
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+    /* Hero */
+    .hero {
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+      padding: 24px 0 8px;
+      text-align: center;
+    }
+    .avatar {
+      width: 150px; height: 150px; border-radius: 50%;
+      border: 3px solid var(--line); object-fit: cover;
+      display: inline-block; margin-bottom: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.25);
+    }
+    .head { display: grid; gap: 8px; margin: 0 0 6px; grid-template-columns: 1fr; }
+    .title { font-size: clamp(28px, 4vw, 40px); margin: 0; letter-spacing: .2px; }
+    .subtitle { color: var(--muted); margin: 0; }
+    .contact { color: var(--muted); margin-top: 8px; }
+
+    /* Pills */
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; justify-content: center; }
+    .pill {
+      background: var(--pill); border: 1px solid var(--line); color: var(--ink);
+      padding: 6px 10px; border-radius: 999px; font-size: 13px;
+    }
+
+    /* Sections / cards */
+    h2 { margin: 28px 0 12px; font-size: 22px; letter-spacing: .2px; }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 18px; margin: 14px 0 24px;
+    }
+    .muted { color: var(--muted); }
+    ul { margin: 8px 0 0 18px; }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      margin: 20px 0 10px;
+    }
+    .shot {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 9/16;
+      display: flex; align-items: center; justify-content: center;
+      padding: 10px; /* inner padding */
+    }
+    .shot img {
+      width: 100%; height: 100%;
+      object-fit: contain; display: block; /* respect padding, avoid cropping */
+    }
+
+    /* Two-column layout inside cards */
+    .twocol { display: grid; gap: 16px; grid-template-columns: 2fr 1fr; }
+    @media (max-width: 840px) { .twocol { grid-template-columns: 1fr; } }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--line); margin-top: 28px; padding: 18px 0 32px; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <!-- HERO / INTRO -->
+  <header class="hero">
+    <div class="wrap">
+      <img
+        class="avatar"
+        src="https://media.licdn.com/dms/image/v2/D5603AQHU17gw49dR3w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1683599855643?e=1758153600&v=beta&t=WItfE2eueQ49Tv0mVwzglwECzf7Mspd0M9GNgIEtn0A"
+        alt="Javier Apaez Arcos profile photo">
+      <div class="head">
+        <h1 class="title">👋 Hi! I'm Javier Apaez Arcos — iOS Developer</h1>
+        <p class="subtitle">I build and ship iOS apps end-to-end: architecture, APIs, UI/UX, analytics, and App Store release.</p>
+        <p class="contact">
+          📧 <a href="mailto:javier.apaez.ar@gmail.com">javier.apaez.ar@gmail.com</a> ·
+          📞 <a href="tel:+528671206530">+52 867 120 6530</a> ·
+          <a href="https://www.linkedin.com/in/javier-apaez-arcos">LinkedIn</a> ·
+          <a href="https://github.com/Javi-ios-dev">GitHub</a>
+        </p>
+      </div>
+      <div class="pills">
+        <span class="pill">Swift</span>
+        <span class="pill">UIKit</span>
+        <span class="pill">SwiftUI</span>
+        <span class="pill">URLSession/REST</span>
+        <span class="pill">MVVM</span>
+        <span class="pill">App Store Connect</span>
+        <span class="pill">CI/CD</span>
+        <span class="pill">Git</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ===== PROJECTS FIRST ===== -->
+    <section>
+      <h2>Projects</h2>
+
+      <!-- Project 1 -->
+      <div class="card">
+        <h3><a href="https://appadvice.com/app/texas-child-support-calculator/1293908701" target="_blank">Texas Child Support Calculator</a></h3>
+        <p class="muted">(Built while working at a previous employer; my name is not publicly shown on the store listing.)</p>
+
+        <div class="gallery">
+          <div class="shot"><img src="https://is2-ssl.mzstatic.com/image/thumb/Purple118/v4/5b/4d/6f/5b4d6f94-edb8-666a-33b9-02849bb6fb45/pr_source.jpg/750x750bb.jpeg" alt="Texas Child Support Calculator screenshot 1"></div>
+          <div class="shot"><img src="https://is3-ssl.mzstatic.com/image/thumb/Purple118/v4/49/59/6d/49596d6b-cf90-844b-b72c-a29e7825449b/pr_source.jpg/750x750bb.jpeg" alt="Texas Child Support Calculator screenshot 2"></div>
+          <div class="shot"><img src="https://is5-ssl.mzstatic.com/image/thumb/Purple128/v4/41/61/dc/4161dc49-ab67-1656-eb40-61d108c6993d/pr_source.jpg/750x750bb.jpeg" alt="Texas Child Support Calculator screenshot 3"></div>
+          <div class="shot"><img src="https://is4-ssl.mzstatic.com/image/thumb/Purple128/v4/cb/67/0b/cb670bac-5694-095b-bd45-74e5c24e41a1/pr_source.jpg/750x750bb.jpeg" alt="Texas Child Support Calculator screenshot 4"></div>
+          <div class="shot"><img src="https://is5-ssl.mzstatic.com/image/thumb/Purple128/v4/f1/fb/0f/f1fb0f6c-bca0-2549-922a-27ba3308f938/pr_source.jpg/750x750bb.jpeg" alt="Texas Child Support Calculator screenshot 5"></div>
+        </div>
+
+        <div class="twocol">
+          <div>
+            <h4>What I worked on</h4>
+            <ul>
+              <li>Calculation logic and validations for edge cases.</li>
+              <li>Accessible form UI in UIKit with clear error states.</li>
+              <li>Lightweight persistence and stable UX.</li>
+              <li>App Store submission and maintenance.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Tech Used</h4>
+            <ul>
+              <li>Swift, UIKit, Auto Layout</li>
+              <li>MVVM, URLSession/REST, JSON</li>
+              <li>App Store Connect</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="card">
+        <h3><a href="https://apps.apple.com/mx/app/nuevolaredo-tv/id1089280435" target="_blank">Nuevo Laredo TV</a></h3>
+        <p class="muted">(Built while working at a previous employer; my name is not publicly shown on the store listing.)</p>
+
+        <div class="gallery">
+          <div class="shot"><img src="http://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/71/79/06/71790693-8562-cfdb-4506-bc95e28c0b79/pr_source.png/300x0w.webp" alt="Nuevo Laredo TV screenshot 1"></div>
+          <div class="shot"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/b9/a1/bd/b9a1bde9-6ec3-8115-2fbb-35cd81fc11a3/pr_source.png/300x0w.webp" alt="Nuevo Laredo TV screenshot 2"></div>
+          <div class="shot"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/5c/23/65/5c2365ca-3939-b4ea-d78c-c4601b1e0cf3/pr_source.png/300x0w.webp" alt="Nuevo Laredo TV screenshot 3"></div>
+          <div class="shot"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/22/b5/f0/22b5f0f2-7683-b292-c0f0-3cd3e9b9cf6c/pr_source.png/300x0w.webp" alt="Nuevo Laredo TV screenshot 4"></div>
+        </div>
+
+        <div class="twocol">
+          <div>
+            <h4>What I worked on</h4>
+            <ul>
+              <li>Video playback (AVKit) and content listing screens.</li>
+              <li>API integration and offline states.</li>
+              <li>Performance tuning and responsive layouts across devices.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Tech Used</h4>
+            <ul>
+              <li>Swift, UIKit/AVKit</li>
+              <li>MVVM, URLSession/REST</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCE AFTER PROJECTS ===== -->
+    <section>
+      <h2>Experience</h2>
+
+      <div class="card">
+        <p><strong>iOS Developer — Softtek</strong> · Monterrey · Aug 2023 – Apr 30, 2025</p>
+        <ul>
+          <li>Integrated native iOS (Swift) modules into a React Native main app (Aeroméxico).</li>
+          <li>Dynamic flight information bottom sheets to improve engagement.</li>
+          <li>Live flight maps and geo-tracking functionality.</li>
+          <li>Document scanner with Vision to process visas securely.</li>
+          <li>Cross-team collaboration with design/backend for consistent UX.</li>
+        </ul>
+        <p class="muted">Tools/Skills: Swift, Scrum, API-first</p>
+      </div>
+
+      <div class="card">
+        <p><strong>iOS Developer — UPAX</strong> · Mexico · Oct 2022 – Jan 2023</p>
+        <ul>
+          <li>New feature development in internal iOS app (Swift/Xcode).</li>
+          <li>Data visualization (Firebase) and external API integrations.</li>
+          <li>VIPER architecture for scalable, maintainable modules.</li>
+          <li>Bug fixing and iOS version compatibility (Alamofire/Pods).</li>
+          <li>Key feature: real-time sales measurement for “Buen Fin”.</li>
+        </ul>
+        <p class="muted">Tools/Skills: Swift, Firebase, Alamofire, VIPER, Pods</p>
+      </div>
+
+      <div class="card">
+        <p><strong>Full-Stack & iOS Developer — GNA Strategy</strong> · Nuevo Laredo · Sep 2016 – Oct 2022</p>
+        <ul>
+          <li>iOS (VIPER) and tech consultancy across multiple projects.</li>
+          <li><em>Nuevo Laredo TV</em> (iOS): news app with categories and feeds.</li>
+          <li><em>AstenApp</em>: medical system (Laravel + iOS), video calls with Twilio.</li>
+          <li>Texas Child Support Calculator (published on the App Store).</li>
+          <li>VR demo for training/retail with Unity/AR.</li>
+        </ul>
+        <p class="muted">Tools/Skills: Swift (iOS), Laravel, JavaScript, Unity, AR</p>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS & EDUCATION ===== -->
+    <section>
+      <h2>Skills</h2>
+      <div class="card">
+        <ul>
+          <li><strong>iOS/Swift:</strong> UIKit, SwiftUI, Auto Layout, URLSession/REST, JSON, MVVM, VIPER</li>
+          <li><strong>Release:</strong> App Store Connect, certificates/profiles, TestFlight</li>
+          <li><strong>Backend/Full-stack:</strong> Laravel, JavaScript</li>
+          <li><strong>Infra/Workflow:</strong> Git, CI/CD, Scrum</li>
+          <li><strong>Other:</strong> Firebase, Alamofire, Vision, Unity/AR, Twilio</li>
+          <li><strong>English:</strong> Intermediate</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="card">
+        <p><strong>Instituto Tecnológico de Nuevo Laredo</strong> — Bachelor’s in Systems Engineering</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="yr"></span> Javier Apaez Arcos — Built with vanilla HTML/CSS. Images belong to their respective owners (App Store listings).
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
