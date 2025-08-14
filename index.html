@@ -8,23 +8,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  /* ===================== THEME TOKENS (LIGHT by default) ===================== */
+  /* ===================== THEME TOKENS (LIGHT por defecto) ===================== */
   :root{
     --page:#eef0f3;
     --card:#ffffff;
     --ink:#0f172a;
     --muted:#616b75;
     --line:#e3e6ea;
-    --brand:#0a84ff;         /* azul del botón */
+    --brand:#0a84ff;         /* azul de acento / botón CV */
     --pill:#f2f5f8;
     --pill-accent: var(--brand);  /* features en azul */
     --radius-xl:26px;
     --radius:16px;
-    --maxw:1040px;           /* wrap más estrecho */
+    --maxw:1040px;           /* ancho del contenido */
     --gap:24px;
     --btn:36px;
   }
-  /* DARK overrides when data-theme="dark" */
+  /* DARK overrides cuando html[data-theme="dark"] */
   [data-theme="dark"]{
     --page:#0e1116;
     --card:#151a21;
@@ -35,7 +35,7 @@
     --pill:#1b222c;
     --pill-accent: var(--brand);
   }
-  /* AUTO: usa sistema cuando el html tenga data-theme="auto" */
+  /* AUTO: usa esquema del sistema cuando html[data-theme="auto"] */
   @media (prefers-color-scheme: dark){
     [data-theme="auto"]{
       --page:#0e1116;
@@ -70,6 +70,7 @@
   .title{font-size:clamp(34px,4.2vw,48px);margin:.6rem 0 .2rem;font-weight:800;letter-spacing:-.02em}
   .subtitle{color:var(--muted);margin:0 0 .6rem}
   .contact{color:var(--muted)}
+  .contact a{color:var(--brand)}
   .cta{margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
   .btn{display:inline-block;background:var(--brand);color:#fff;border:0;padding:10px 14px;border-radius:12px;font-weight:700}
   .btn.ghost{background:color-mix(in oklab, var(--brand) 8%, transparent);color:var(--ink);border:1px solid var(--line)}
@@ -154,7 +155,7 @@
   }
   .slide img{
     width:100%; height:100%;
-    object-fit:contain;       /* imagen completa */
+    object-fit:contain;       /* imagen completa sin recorte */
     border-radius:0; display:block;
   }
   .nav-btn{
@@ -180,8 +181,10 @@
   }
   .tag.accent{ background:var(--pill-accent); border-color:transparent; color:#fff; }
 
-  /* ====== FIX: Tech Used visibles en modo oscuro ====== */
-  /* (aplica solo a los grupos con clase .tags.tech) */
+  /* ====== Fix: Tech Used visibles en modo oscuro ====== */
+  .tags.tech .tag{ /* base */
+    background:var(--pill);
+  }
   [data-theme="dark"] .tags.tech .tag{
     color:#ffffff;
     border:1px solid rgba(255,255,255,.28);
@@ -196,6 +199,41 @@
   }
 
   footer{ color:var(--muted); text-align:center; padding:28px 0 }
+
+  /* ---------- Mobile comfort tweaks ---------- */
+  @media (max-width: 560px) {
+    .wrap { padding: 18px; }
+    .hero { padding: 28px 0 10px; }
+    .avatar { width: 120px; height: 120px; }
+    .title {
+      font-size: clamp(28px, 7.5vw, 36px);
+      line-height: 1.15;
+      margin: .5rem 0 .2rem;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: 14.5px;
+      line-height: 1.55;
+      margin-bottom: .6rem;
+      padding: 0 6px;
+    }
+    .contact {
+      font-size: 14px;
+      display: flex; flex-wrap: wrap;
+      gap: 6px 12px; justify-content: center;
+      margin: 6px auto 0; max-width: 36ch;
+    }
+    .cta { margin-top: 14px; flex-direction: column; align-items: stretch; gap: 8px; }
+    .cta .btn { width: 100%; padding: 12px 14px; }
+    .theme-switch { margin-top: 10px; display: grid; grid-template-columns: 1fr; width: 100%; }
+    .theme-switch button { padding: 12px 14px; text-align: center; }
+    .proj-row, .proj-row.reverse { gap: 16px; margin-bottom: 22px; }
+    .media-frame { width: 92%; max-width: 320px; }
+    .app-title { font-size: 26px; }
+    .app-sub { font-size: 14px; }
+    .tag { padding: 7px 12px; font-size: 12.5px; }
+    h2 { margin-top: 24px; }
+  }
 </style>
 </head>
 <body>
@@ -461,17 +499,20 @@
       });
     });
 
-    // If in auto, react to system changes
+    // Si está en auto, responde a cambios del sistema
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     mq.addEventListener?.('change', ()=>{
       const current = document.documentElement.getAttribute('data-theme');
       if(current === 'auto'){
-        apply('auto'); // refresh vars through @media block
+        apply('auto'); // refresca variables vía @media
       }
     });
+
+    // Año footer
+    document.getElementById('yr').textContent=new Date().getFullYear();
   })();
 
-  // ===================== Carousel: 1 image per view (contain) =====================
+  // ===================== Carousel (1 imagen por vista) =====================
   function initCarousel(root){
     const track = root.querySelector('.carousel-track');
     const slides = Array.from(root.querySelectorAll('.slide'));
@@ -504,10 +545,10 @@
     const nextSlide = ()=>goTo(index+1);
     const prevSlide = ()=>goTo(index-1);
 
-    prev.addEventListener('click', prevSlide);
-    next.addEventListener('click', nextSlide);
+    prev?.addEventListener('click', prevSlide);
+    next?.addEventListener('click', nextSlide);
 
-    // Touch swipe
+    // Swipe táctil
     track.addEventListener('touchstart', e=>{startX=e.touches[0].clientX},{passive:true});
     track.addEventListener('touchmove',  e=>{currentX=e.touches[0].clientX},{passive:true});
     track.addEventListener('touchend',   ()=>{
@@ -519,10 +560,7 @@
     update();
   }
 
-  document.addEventListener('DOMContentLoaded', ()=>{
-    document.getElementById('yr').textContent=new Date().getFullYear();
-    document.querySelectorAll('[data-carousel]').forEach(initCarousel);
-  });
+  document.querySelectorAll('[data-carousel]').forEach(initCarousel);
 </script>
 </body>
 </html>
