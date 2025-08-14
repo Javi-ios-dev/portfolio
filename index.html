@@ -2,74 +2,76 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>[Tu Nombre] — iOS Developer</title>
+  <title>Texas Child Support Calculator — Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;color:#111}
-    .wrap{max-width:900px;margin:0 auto;padding:24px}
-    h1{font-size:32px;margin:0 0 6px}
-    .sub{color:#555;margin:0 0 18px}
-    h2{margin-top:28px}
-    .card{border:1px solid #eee;border-radius:12px;padding:16px;margin:14px 0}
-    a{color:#0a66c2;text-decoration:none}
-    a:hover{text-decoration:underline}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    @media (max-width:760px){.grid{grid-template-columns:1fr}}
-    .muted{color:#666}
-    ul{margin:8px 0 0 18px}
+    body { font-family: system-ui, sans-serif; margin: 24px; color: #222; }
+    h2 { margin-bottom: 16px; }
+    .carousel {
+      position: relative;
+      max-width: 600px;
+      margin-bottom: 24px;
+    }
+    .carousel img {
+      width: 100%;
+      border-radius: 8px;
+      display: none;
+    }
+    .carousel img.active {
+      display: block;
+    }
+    .carousel-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .carousel-buttons button {
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .carousel-buttons button:hover {
+      background: rgba(0,0,0,0.7);
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>[Tu Nombre]</h1>
-    <p class="sub">iOS Developer — Swift • UIKit/SwiftUI • App Store releases</p>
 
-    <p>iOS developer focused on clean architecture, performance and great UX. Experience shipping apps end-to-end (APIs, UI, analytics, App Store).</p>
-
-    <p><strong>Contact:</strong>
-      <a href="mailto:[tu@email.com]">[tu@email.com]</a> ·
-      [+52 (###) ### ####] · [Ciudad, País] ·
-      <a href="[LinkedIn URL]">LinkedIn</a> ·
-      <a href="[GitHub URL]">GitHub</a>
-    </p>
-
-    <h2>Featured Projects</h2>
-
-    <div class="card">
-      <h3>[App Name] (iOS)</h3>
-      <p><a href="[App Store URL]" target="_blank">App link</a></p>
-      <p class="muted">Role: iOS Developer at [Company]</p>
-      <ul>
-        <li>[Impact bullet 1]</li>
-        <li>[Impact bullet 2]</li>
-        <li>[Impact bullet 3]</li>
-      </ul>
-      <p class="muted">Stack: [Swift, UIKit/SwiftUI, MVVM, AVKit, etc.]</p>
-      <p class="muted">Note: [Si tu nombre no aparece en el listing, acláralo aquí.]</p>
+  <h2>Texas Child Support Calculator (iOS)</h2>
+  <div class="carousel">
+    <img src="https://is2-ssl.mzstatic.com/image/thumb/Purple118/v4/5b/4d/6f/5b4d6f94-edb8-666a-33b9-02849bb6fb45/pr_source.jpg/750x750bb.jpeg" class="active" alt="Screenshot 1">
+    <img src="https://is3-ssl.mzstatic.com/image/thumb/Purple118/v4/49/59/6d/49596d6b-cf90-844b-b72c-a29e7825449b/pr_source.jpg/750x750bb.jpeg" alt="Screenshot 2">
+    <img src="https://is5-ssl.mzstatic.com/image/thumb/Purple128/v4/41/61/dc/4161dc49-ab67-1656-eb40-61d108c6993d/pr_source.jpg/750x750bb.jpeg" alt="Screenshot 3">
+    <img src="https://is4-ssl.mzstatic.com/image/thumb/Purple128/v4/cb/67/0b/cb670bac-5694-095b-bd45-74e5c24e41a1/pr_source.jpg/750x750bb.jpeg" alt="Screenshot 4">
+    <img src="https://is5-ssl.mzstatic.com/image/thumb/Purple128/v4/f1/fb/0f/f1fb0f6c-bca0-2549-922a-27ba3308f938/pr_source.jpg/750x750bb.jpeg" alt="Screenshot 5">
+    <div class="carousel-buttons">
+      <button id="prevBtn">◀</button>
+      <button id="nextBtn">▶</button>
     </div>
+  </div>
 
-    <div class="card">
-      <h3>[App/Project 2]</h3>
-      <p><a href="[URL]" target="_blank">Link</a></p>
-      <p class="muted">Role: [Tu rol] — [Empresa]</p>
-      <ul>
-        <li>[Impact bullet 1]</li>
-        <li>[Impact bullet 2]</li>
-        <li>[Impact bullet 3]</li>
-      </ul>
-      <p class="muted">Stack: [Tecnologías]</p>
-    </div>
+  <script>
+    const images = document.querySelectorAll('.carousel img');
+    let currentIndex = 0;
 
-    <h2>Skills</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Technical</h3>
-        <ul>
-          <li>Swift, UIKit, SwiftUI, Auto Layout</li>
-          <li>URLSession/REST, JSON</li>
-          <li>MVVM, modularization, code review</li>
-          <li>Git, CI/CD, App Store Connect</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>High
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      images[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      images[currentIndex].classList.add('active');
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      images[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % images.length;
+      images[currentIndex].classList.add('active');
+    });
+  </script>
+
+</body>
+</html>
