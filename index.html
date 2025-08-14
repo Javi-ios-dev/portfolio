@@ -4,6 +4,12 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Javier Apaez Arcos — iOS Developer</title>
+
+<!-- 🔵 Ayuda a que el HTML no se sirva de caché (parcial) -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -571,6 +577,36 @@
   }
 
   document.querySelectorAll('[data-carousel]').forEach(initCarousel);
+</script>
+
+<!-- 🔵 Cache-busting DEV: solo si abres con ?dev=1 -->
+<script>
+(function () {
+  const url = new URL(location.href);
+  if (!url.searchParams.has('dev')) return; // Activa con ?dev=1
+  const ts = Date.now();
+
+  function bust(el, attr){
+    const val = el.getAttribute(attr);
+    if (!val) return;
+    // Evita data: y blob:
+    if (val.startsWith('data:') || val.startsWith('blob:')) return;
+    const u = new URL(val, location.href);
+    // Si es preconnect/dns-prefetch, no lo toques
+    if (el.tagName === 'LINK' && el.rel && el.rel !== 'stylesheet') return;
+    u.searchParams.set('v', ts);
+    el.setAttribute(attr, u.toString());
+  }
+
+  // Stylesheets externos
+  document.querySelectorAll('link[rel="stylesheet"]').forEach(el => bust(el, 'href'));
+  // Scripts externos
+  document.querySelectorAll('script[src]').forEach(el => bust(el, 'src'));
+  // Imágenes
+  document.querySelectorAll('img[src]').forEach(el => bust(el, 'src'));
+
+  console.log('DEV cache-busting activo:', new Date(ts).toISOString());
+})();
 </script>
 </body>
 </html>
