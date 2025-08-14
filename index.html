@@ -1,200 +1,309 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Javier Apaez Arcos — iOS Developer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    :root {
-      /* Pleasant dark-ish theme based on your reference color */
-      --bg: #2b2f36;         /* page background */
-      --card: #3a3f47;       /* cards */
-      --ink: #f5f5f5;        /* main text */
-      --muted: #c0c4cc;      /* secondary text */
-      --brand: #4ea3ff;      /* links */
-      --line: #4b5058;       /* borders */
-      --pill: #444a52;       /* skill pills */
-      --radius: 14px;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--bg);
-      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-    }
-    a { color: var(--brand); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Javier Apaez Arcos — iOS Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --page:#eef0f3;
+    --card:#ffffff;
+    --ink:#0f172a;
+    --muted:#616b75;
+    --line:#e3e6ea;
+    --brand:#0a84ff;
+    --pill:#f2f5f8;
+    --pill-accent:#ff4d40;
+    --radius-xl:26px;
+    --radius:16px;
+    --maxw:1040px;   /* wrap más estrecho */
+    --gap:24px;
+    --btn:36px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--page);color:var(--ink);
+    font:16px/1.6 "Inter", system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  }
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
 
-    /* Hero */
-    .hero {
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
-      padding: 24px 0 8px;
-      text-align: center;
-    }
-    .avatar {
-      width: 150px; height: 150px; border-radius: 50%;
-      border: 3px solid var(--line); object-fit: cover;
-      display: inline-block; margin-bottom: 16px;
-      box-shadow: 0 4px 24px rgba(0,0,0,.25);
-    }
-    .head { display: grid; gap: 8px; margin: 0 0 6px; grid-template-columns: 1fr; }
-    .title { font-size: clamp(28px, 4vw, 40px); margin: 0; letter-spacing: .2px; }
-    .subtitle { color: var(--muted); margin: 0; }
-    .contact { color: var(--muted); margin-top: 8px; }
+  /* HERO */
+  .hero{text-align:center;padding:32px 0 12px}
+  .avatar{width:150px;height:150px;border-radius:50%;object-fit:cover;border:4px solid #fff}
+  .title{font-size:clamp(34px,4.2vw,48px);margin:.6rem 0 .2rem;font-weight:800;letter-spacing:-.02em}
+  .subtitle{color:var(--muted);margin:0 0 .6rem}
+  .contact{color:var(--muted)}
+  .cta{margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;background:var(--brand);color:#fff;border:0;padding:10px 14px;border-radius:12px;font-weight:700}
+  .btn.ghost{background:#00000008;color:var(--ink);border:1px solid var(--line)}
 
-    /* Pills */
-    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; justify-content: center; }
-    .pill {
-      background: var(--pill); border: 1px solid var(--line); color: var(--ink);
-      padding: 6px 10px; border-radius: 999px; font-size: 13px;
-    }
+  /* SECTION TITLES CENTERED */
+  h2{
+    font-size:22px;margin:28px 0 12px;font-weight:800;letter-spacing:-.01em;
+    text-align:center;
+  }
+  h3{margin:0 0 6px;font-weight:800;letter-spacing:-.01em}
+  h4{margin:12px 0 6px;font-size:18px;font-weight:800}
+  .muted{color:var(--muted)}
 
-    /* Sections / cards */
-    h2 { margin: 28px 0 12px; font-size: 22px; letter-spacing: .2px; }
-    .card {
-      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-      padding: 18px; margin: 14px 0 24px;
+  /* ===== PROJECT ROWS (NARROW media + WIDE about) ===== */
+  .proj-row{
+    display:grid;
+    grid-template-columns: 460px 1fr;             /* NARROW | WIDE */
+    grid-template-areas: "media about";
+    gap:var(--gap); margin:0 0 28px; align-items:stretch;
+  }
+  .proj-row.reverse{
+    grid-template-columns: 1fr 460px;             /* WIDE | NARROW */
+    grid-template-areas: "about media";
+  }
+  @media (max-width:1000px){
+    .proj-row, .proj-row.reverse{
+      grid-template-columns:1fr;
+      grid-template-areas:
+        "media"
+        "about";
     }
-    .muted { color: var(--muted); }
-    ul { margin: 8px 0 0 18px; }
+  }
 
-    /* Gallery */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 16px;
-      margin: 20px 0 10px;
-    }
-    .shot {
-      background: var(--bg);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      overflow: hidden;
-      aspect-ratio: 9/16;
-      display: flex; align-items: center; justify-content: center;
-      padding: 10px; /* inner padding */
-    }
-    .shot img {
-      width: 100%; height: 100%;
-      object-fit: contain; display: block; /* respect padding, avoid cropping */
-    }
+  /* Base card (sin bordes) */
+  .card-xl{
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    padding:22px; height:100%;
+  }
 
-    /* Two-column layout inside cards */
-    .twocol { display: grid; gap: 16px; grid-template-columns: 2fr 1fr; }
-    @media (max-width: 840px) { .twocol { grid-template-columns: 1fr; } }
+  /* Areas */
+  .media-card{ grid-area:media; display:flex; flex-direction:column; align-items:center; padding:24px 20px; }
+  .about-card{ grid-area:about; display:flex; flex-direction:column; }
 
-    /* Footer */
-    footer { border-top: 1px solid var(--line); margin-top: 28px; padding: 18px 0 32px; color: var(--muted); }
-  </style>
+  /* Media titles */
+  .app-head{ text-align:center; margin-bottom:10px;}
+  .app-title{ font-size:32px; font-weight:800; letter-spacing:-.02em; margin:0 0 2px;}
+  .app-sub{ color:var(--muted); margin:0; font-weight:500;}
+
+  /* Frame para centrar carrusel */
+  .media-frame{ width:88%; max-width:360px; margin:0 auto; }
+
+  /* ===== CAROUSEL (imágenes completas, sin barras negras) ===== */
+  .carousel{ position:relative; margin-top:2px; }
+  .carousel-viewport{
+    width:100%; overflow:hidden; border-radius:18px; background:transparent;
+  }
+  .carousel-track{ display:flex; gap:14px; transition:transform .35s ease; will-change:transform; }
+  .slide{
+    min-width:100%; width:100%;
+    aspect-ratio: 9/16;       /* vertical completo */
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    background:var(--card);   /* “letterbox” blanco como la card */
+  }
+  .slide img{
+    width:100%; height:100%;
+    object-fit:contain;       /* muestra la imagen completa */
+    border-radius:0;
+    display:block;
+  }
+  .nav-btn{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:var(--btn); height:var(--btn); border-radius:50%;
+    border:1px solid var(--line); background:#ffffffcc; color:#111; font-weight:800;
+    display:grid; place-items:center; cursor:pointer; user-select:none;
+  }
+  .nav-prev{ left:6px } .nav-next{ right:6px }
+  .dots{ display:flex; gap:6px; justify-content:center; margin-top:8px }
+  .dot{ width:8px; height:8px; border-radius:50%; background:#c9d1d9 }
+  .dot.active{ background:var(--brand) }
+
+  /* About content — más grande */
+  .about-title{ font-size:30px; font-weight:800; letter-spacing:-.02em; margin:4px 0 8px;}
+  .about-p{
+    margin:0 0 10px; color:var(--ink);
+    font-size:18px;
+    line-height:1.7;
+  }
+  .tags{ display:flex; flex-wrap:wrap; gap:10px; margin:10px 0 0; }
+  .tag{
+    background:var(--pill); border:1px solid var(--line); color:#1f2a35;
+    padding:8px 14px; border-radius:999px; font-size:13px; font-weight:700; white-space:nowrap;
+  }
+  .tag.accent{ background:var(--pill-accent); border-color:transparent; color:#fff; }
+
+  /* Generic text cards (sin bordes) */
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:18px; margin:14px 0 22px;
+  }
+
+  footer{ color:var(--muted); text-align:center; padding:28px 0 }
+</style>
 </head>
 <body>
 
-  <!-- HERO / INTRO -->
+  <!-- HERO -->
   <header class="hero">
-    <div class="wrap">
-      <img
-        class="avatar"
-        src="https://media.licdn.com/dms/image/v2/D5603AQHU17gw49dR3w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1683599855643?e=1758153600&v=beta&t=WItfE2eueQ49Tv0mVwzglwECzf7Mspd0M9GNgIEtn0A"
-        alt="Javier Apaez Arcos profile photo">
-      <div class="head">
-        <h1 class="title">👋 Hi! I'm Javier Apaez Arcos — iOS Developer</h1>
-        <p class="subtitle">I build and ship iOS apps end-to-end: architecture, APIs, UI/UX, analytics, and App Store release.</p>
-        <p class="contact">
-          📧 <a href="mailto:javier.apaez.ar@gmail.com">javier.apaez.ar@gmail.com</a> ·
-          📞 <a href="tel:+528671206530">+52 867 120 6530</a> ·
-          <a href="https://www.linkedin.com/in/javier-apaez-arcos">LinkedIn</a> ·
-          <a href="https://github.com/Javi-ios-dev">GitHub</a>
-        </p>
-      </div>
-      <div class="pills">
-        <span class="pill">Swift</span>
-        <span class="pill">UIKit</span>
-        <span class="pill">SwiftUI</span>
-        <span class="pill">URLSession/REST</span>
-        <span class="pill">MVVM</span>
-        <span class="pill">App Store Connect</span>
-        <span class="pill">CI/CD</span>
-        <span class="pill">Git</span>
-      </div>
+    <img class="avatar" src="https://media.licdn.com/dms/image/v2/D5603AQHU17gw49dR3w/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1683599855643?e=1758153600&v=beta&t=WItfE2eueQ49Tv0mVwzglwECzf7Mspd0M9GNgIEtn0A" alt="Javier Apaez Arcos">
+    <h1 class="title">Javier Apaez Arcos — iOS Developer</h1>
+    <p class="subtitle">I build and ship iOS apps end-to-end: architecture, APIs, UI/UX, analytics, and App Store release.</p>
+    <p class="contact">
+      📧 <a href="mailto:javier.apaez.ar@gmail.com">javier.apaez.ar@gmail.com</a> ·
+      📞 <a href="tel:+528671206530">+52 867 120 6530</a> ·
+      <a href="https://www.linkedin.com/in/javier-apaez-arcos">LinkedIn</a> ·
+      <a href="https://github.com/tuusuario">GitHub</a>
+    </p>
+    <div class="cta">
+      <a class="btn" href="YOUR_CV_URL.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+      <a class="btn ghost" href="#projects">View Projects ↓</a>
     </div>
   </header>
 
   <main class="wrap">
 
-    <!-- ===== PROJECTS FIRST ===== -->
-    <section>
+    <!-- PROJECTS -->
+    <section id="projects">
       <h2>Projects</h2>
 
-      <!-- Project 1 -->
-      <div class="card">
-        <h3><a href="https://appadvice.com/app/texas-child-support-calculator/1293908701" target="_blank">Texas Child Support Calculator</a></h3>
-        <p class="muted">(Built while working at a previous employer; my name is not publicly shown on the store listing.)</p>
-
-        <div class="gallery">
-          <div class="shot"><img src="https://is2-ssl.mzstatic.com/image/thumb/Purple118/v4/5b/4d/6f/5b4d6f94-edb8-666a-33b9-02849bb6fb45/pr_source.jpg/750x750bb.jpeg" alt="Texas Child Support Calculator screenshot 1"></div>
-          <div class="shot"><img src="https://is3-ssl.mzstatic.com/image/thumb/Purple118/v4/49/59/6d/49596d6b-cf90-844b-b72c-a29e7825449b/pr_source.jpg/750x750bb.jpeg" alt="Texas Child Support Calculator screenshot 2"></div>
-          <div class="shot"><img src="https://is5-ssl.mzstatic.com/image/thumb/Purple128/v4/41/61/dc/4161dc49-ab67-1656-eb40-61d108c6993d/pr_source.jpg/750x750bb.jpeg" alt="Texas Child Support Calculator screenshot 3"></div>
-          <div class="shot"><img src="https://is4-ssl.mzstatic.com/image/thumb/Purple128/v4/cb/67/0b/cb670bac-5694-095b-bd45-74e5c24e41a1/pr_source.jpg/750x750bb.jpeg" alt="Texas Child Support Calculator screenshot 4"></div>
-          <div class="shot"><img src="https://is5-ssl.mzstatic.com/image/thumb/Purple128/v4/f1/fb/0f/f1fb0f6c-bca0-2549-922a-27ba3308f938/pr_source.jpg/750x750bb.jpeg" alt="Texas Child Support Calculator screenshot 5"></div>
-        </div>
-
-        <div class="twocol">
-          <div>
-            <h4>What I worked on</h4>
-            <ul>
-              <li>Calculation logic and validations for edge cases.</li>
-              <li>Accessible form UI in UIKit with clear error states.</li>
-              <li>Lightweight persistence and stable UX.</li>
-              <li>App Store submission and maintenance.</li>
-            </ul>
+      <!-- Row 1 -->
+      <div class="proj-row">
+        <article class="card-xl media-card">
+          <div class="app-head">
+            <h3 class="app-title">Texas Child Support Calculator</h3>
+            <p class="app-sub">Child support estimator app</p>
           </div>
-          <div>
-            <h4>Tech Used</h4>
-            <ul>
-              <li>Swift, UIKit, Auto Layout</li>
-              <li>MVVM, URLSession/REST, JSON</li>
-              <li>App Store Connect</li>
-            </ul>
+          <div class="media-frame">
+            <div class="carousel" data-carousel>
+              <button class="nav-btn nav-prev" aria-label="Previous slide">‹</button>
+              <div class="carousel-viewport">
+                <div class="carousel-track">
+                  <div class="slide"><img loading="lazy" src="https://is2-ssl.mzstatic.com/image/thumb/Purple118/v4/5b/4d/6f/5b4d6f94-edb8-666a-33b9-02849bb6fb45/pr_source.jpg/750x750bb.jpeg" alt="Texas 1"></div>
+                  <div class="slide"><img loading="lazy" src="https://is3-ssl.mzstatic.com/image/thumb/Purple118/v4/49/59/6d/49596d6b-cf90-844b-b72c-a29e7825449b/pr_source.jpg/750x750bb.jpeg" alt="Texas 2"></div>
+                  <div class="slide"><img loading="lazy" src="https://is5-ssl.mzstatic.com/image/thumb/Purple128/v4/41/61/dc/4161dc49-ab67-1656-eb40-61d108c6993d/pr_source.jpg/750x750bb.jpeg" alt="Texas 3"></div>
+                  <div class="slide"><img loading="lazy" src="https://is4-ssl.mzstatic.com/image/thumb/Purple128/v4/cb/67/0b/cb670bac-5694-095b-bd45-74e5c24e41a1/pr_source.jpg/750x750bb.jpeg" alt="Texas 4"></div>
+                  <div class="slide"><img loading="lazy" src="https://is5-ssl.mzstatic.com/image/thumb/Purple128/v4/f1/fb/0f/f1fb0f6c-bca0-2549-922a-27ba3308f938/pr_source.jpg/750x750bb.jpeg" alt="Texas 5"></div>
+                </div>
+              </div>
+              <button class="nav-btn nav-next" aria-label="Next slide">›</button>
+              <div class="dots"></div>
+            </div>
           </div>
-        </div>
+        </article>
+
+        <article class="card-xl about-card">
+          <h3 class="about-title">About</h3>
+          <p class="muted">(Built while working at a previous employer; my name is not publicly shown on the store listing.)</p>
+          <p class="about-p">iOS app that helps estimate child support payments aligned with Texas state guidelines.</p>
+          <h4>A few basic features</h4>
+          <div class="tags">
+            <span class="tag accent">forms & validations</span>
+            <span class="tag accent">edge-case logic</span>
+            <span class="tag accent">persistent state</span>
+            <span class="tag accent">App Store release</span>
+          </div>
+          <h4 style="margin-top:12px">Tech Used</h4>
+          <div class="tags">
+            <span class="tag">Swift</span><span class="tag">UIKit</span><span class="tag">Auto Layout</span>
+            <span class="tag">MVVM</span><span class="tag">URLSession/REST</span><span class="tag">JSON</span>
+          </div>
+        </article>
       </div>
 
-      <!-- Project 2 -->
-      <div class="card">
-        <h3><a href="https://apps.apple.com/mx/app/nuevolaredo-tv/id1089280435" target="_blank">Nuevo Laredo TV</a></h3>
-        <p class="muted">(Built while working at a previous employer; my name is not publicly shown on the store listing.)</p>
-
-        <div class="gallery">
-          <div class="shot"><img src="http://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/71/79/06/71790693-8562-cfdb-4506-bc95e28c0b79/pr_source.png/300x0w.webp" alt="Nuevo Laredo TV screenshot 1"></div>
-          <div class="shot"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/b9/a1/bd/b9a1bde9-6ec3-8115-2fbb-35cd81fc11a3/pr_source.png/300x0w.webp" alt="Nuevo Laredo TV screenshot 2"></div>
-          <div class="shot"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/5c/23/65/5c2365ca-3939-b4ea-d78c-c4601b1e0cf3/pr_source.png/300x0w.webp" alt="Nuevo Laredo TV screenshot 3"></div>
-          <div class="shot"><img src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/22/b5/f0/22b5f0f2-7683-b292-c0f0-3cd3e9b9cf6c/pr_source.png/300x0w.webp" alt="Nuevo Laredo TV screenshot 4"></div>
-        </div>
-
-        <div class="twocol">
-          <div>
-            <h4>What I worked on</h4>
-            <ul>
-              <li>Video playback (AVKit) and content listing screens.</li>
-              <li>API integration and offline states.</li>
-              <li>Performance tuning and responsive layouts across devices.</li>
-            </ul>
+      <!-- Row 2 (intercalada) -->
+      <div class="proj-row reverse">
+        <article class="card-xl about-card">
+          <h3 class="about-title">About</h3>
+          <p class="muted">(Built while working at a previous employer; my name is not publicly shown on the store listing.)</p>
+          <p class="about-p">News and live streaming app for a local TV station with categories, feeds and media playback.</p>
+          <h4>A few basic features</h4>
+          <div class="tags">
+            <span class="tag accent">AVKit playback</span>
+            <span class="tag accent">offline states</span>
+            <span class="tag accent">responsive UI</span>
           </div>
-          <div>
-            <h4>Tech Used</h4>
-            <ul>
-              <li>Swift, UIKit/AVKit</li>
-              <li>MVVM, URLSession/REST</li>
-            </ul>
+          <h4 style="margin-top:12px">Tech Used</h4>
+          <div class="tags">
+            <span class="tag">Swift</span><span class="tag">UIKit / AVKit</span><span class="tag">MVVM</span><span class="tag">URLSession/REST</span>
           </div>
-        </div>
+        </article>
+
+        <article class="card-xl media-card">
+          <div class="app-head">
+            <h3 class="app-title">Nuevo Laredo TV</h3>
+            <p class="app-sub">News & live streaming</p>
+          </div>
+          <div class="media-frame">
+            <div class="carousel" data-carousel>
+              <button class="nav-btn nav-prev" aria-label="Previous slide">‹</button>
+              <div class="carousel-viewport">
+                <div class="carousel-track">
+                  <div class="slide"><img loading="lazy" src="http://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/71/79/06/71790693-8562-cfdb-4506-bc95e28c0b79/pr_source.png/300x0w.webp" alt="NLTV 1"></div>
+                  <div class="slide"><img loading="lazy" src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/b9/a1/bd/b9a1bde9-6ec3-8115-2fbb-35cd81fc11a3/pr_source.png/300x0w.webp" alt="NLTV 2"></div>
+                  <div class="slide"><img loading="lazy" src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/5c/23/65/5c2365ca-3939-b4ea-d78c-c4601b1e0cf3/pr_source.png/300x0w.webp" alt="NLTV 3"></div>
+                  <div class="slide"><img loading="lazy" src="https://is1-ssl.mzstatic.com/image/thumb/Purple71/v4/22/b5/f0/22b5f0f2-7683-b292-c0f0-3cd3e9b9cf6c/pr_source.png/300x0w.webp" alt="NLTV 4"></div>
+                </div>
+              </div>
+              <button class="nav-btn nav-next" aria-label="Next slide">›</button>
+              <div class="dots"></div>
+            </div>
+          </div>
+        </article>
       </div>
+
+      <!-- Row 3 (AstenApp) -->
+      <div class="proj-row">
+        <article class="card-xl media-card">
+          <div class="app-head">
+            <h3 class="app-title">AstenApp</h3>
+            <p class="app-sub">Medical system (iOS + Laravel)</p>
+          </div>
+          <div class="media-frame">
+            <div class="carousel" data-carousel>
+              <button class="nav-btn nav-prev" aria-label="Previous slide">‹</button>
+              <div class="carousel-viewport">
+                <div class="carousel-track">
+                  <!-- 1 imagen (puedes agregar más si quieres) -->
+                  <div class="slide">
+                    <img loading="lazy" src="https://astenapp.com/images/phone.png" alt="AstenApp screen">
+                  </div>
+                </div>
+              </div>
+              <button class="nav-btn nav-next" aria-label="Next slide">›</button>
+              <div class="dots"></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card-xl about-card">
+          <h3 class="about-title">About</h3>
+          <p class="muted">(Built while working at a previous employer.)</p>
+          <p class="about-p">
+            AstenApp is a medical system combining an iOS client with a Laravel backend. It supports
+            patient records and secure video consultations. My work focused on the iOS client and
+            the Twilio integration for reliable video calls.
+          </p>
+          <h4>Key bits</h4>
+          <div class="tags">
+            <span class="tag accent">Twilio video calls</span>
+            <span class="tag accent">secure flows</span>
+            <span class="tag accent">patient records</span>
+          </div>
+          <h4 style="margin-top:12px">Tech Used</h4>
+          <div class="tags">
+            <span class="tag">Swift</span><span class="tag">UIKit</span><span class="tag">VIPER</span>
+            <span class="tag">Laravel</span><span class="tag">REST APIs</span><span class="tag">Twilio</span>
+          </div>
+        </article>
+      </div>
+
     </section>
 
-    <!-- ===== EXPERIENCE AFTER PROJECTS ===== -->
+    <!-- EXPERIENCE -->
     <section>
       <h2>Experience</h2>
 
@@ -235,7 +344,7 @@
       </div>
     </section>
 
-    <!-- ===== SKILLS & EDUCATION ===== -->
+    <!-- SKILLS & EDUCATION -->
     <section>
       <h2>Skills</h2>
       <div class="card">
@@ -256,17 +365,63 @@
         <p><strong>Instituto Tecnológico de Nuevo Laredo</strong> — Bachelor’s in Systems Engineering</p>
       </div>
     </section>
-
   </main>
 
-  <footer>
-    <div class="wrap">
-      © <span id="yr"></span> Javier Apaez Arcos — Built with vanilla HTML/CSS. Images belong to their respective owners (App Store listings).
-    </div>
-  </footer>
+  <footer>© <span id="yr"></span> Javier Apaez Arcos — Built with HTML/CSS. Images belong to their respective owners.</footer>
 
-  <script>
-    document.getElementById('yr').textContent = new Date().getFullYear();
-  </script>
+<script>
+  // Carousel: 1 image per view (contain = imagen completa)
+  function initCarousel(root){
+    const track = root.querySelector('.carousel-track');
+    const slides = Array.from(root.querySelectorAll('.slide'));
+    const prev = root.querySelector('.nav-prev');
+    const next = root.querySelector('.nav-next');
+    const dotsWrap = root.querySelector('.dots');
+    const viewport = root.querySelector('.carousel-viewport');
+    if(!track || slides.length===0 || !viewport) return;
+
+    const dots = slides.map((_,i)=>{
+      const d=document.createElement('span');
+      d.className='dot'+(i===0?' active':'');
+      d.addEventListener('click',()=>goTo(i));
+      dotsWrap.appendChild(d);
+      return d;
+    });
+
+    let index=0, startX=0, currentX=0;
+    const SWIPE=50, GAP=14;
+
+    function update(){
+      const vw = viewport.getBoundingClientRect().width;
+      track.style.transform = `translateX(${-index * (vw + GAP)}px)`;
+      dots.forEach((d,i)=>d.classList.toggle('active', i===index));
+    }
+    function goTo(i){
+      index = Math.min(Math.max(0,i), slides.length-1);
+      update();
+    }
+    const nextSlide = ()=>goTo(index+1);
+    const prevSlide = ()=>goTo(index-1);
+
+    prev.addEventListener('click', prevSlide);
+    next.addEventListener('click', nextSlide);
+
+    // Touch swipe
+    track.addEventListener('touchstart', e=>{startX=e.touches[0].clientX},{passive:true});
+    track.addEventListener('touchmove',  e=>{currentX=e.touches[0].clientX},{passive:true});
+    track.addEventListener('touchend',   ()=>{
+      const dx=currentX-startX; if(Math.abs(dx)>SWIPE) (dx<0?nextSlide():prevSlide());
+      startX=currentX=0;
+    });
+
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    document.getElementById('yr').textContent=new Date().getFullYear();
+    document.querySelectorAll('[data-carousel]').forEach(initCarousel);
+  });
+</script>
 </body>
 </html>
