@@ -182,9 +182,7 @@
   .tag.accent{ background:var(--pill-accent); border-color:transparent; color:#fff; }
 
   /* ====== Fix: Tech Used visibles en modo oscuro ====== */
-  .tags.tech .tag{ /* base */
-    background:var(--pill);
-  }
+  .tags.tech .tag{ background:var(--pill); }
   [data-theme="dark"] .tags.tech .tag{
     color:#ffffff;
     border:1px solid rgba(255,255,255,.28);
@@ -200,7 +198,7 @@
 
   footer{ color:var(--muted); text-align:center; padding:28px 0 }
 
-  /* ---------- Mobile comfort tweaks ---------- */
+  /* ---------- Mobile comfort tweaks + botones con margen ---------- */
   @media (max-width: 560px) {
     .wrap { padding: 18px; }
     .hero { padding: 28px 0 10px; }
@@ -223,10 +221,25 @@
       gap: 6px 12px; justify-content: center;
       margin: 6px auto 0; max-width: 36ch;
     }
-    .cta { margin-top: 14px; flex-direction: column; align-items: stretch; gap: 8px; }
-    .cta .btn { width: 100%; padding: 12px 14px; }
-    .theme-switch { margin-top: 10px; display: grid; grid-template-columns: 1fr; width: 100%; }
-    .theme-switch button { padding: 12px 14px; text-align: center; }
+    .cta {
+      margin-top: 14px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+    /* Botones con margen lateral (no full width) */
+    .cta .btn {
+      width: auto;
+      max-width: 92%;
+      margin: 0 auto;
+      padding: 12px 14px;
+    }
+    /* Selector de tema centrado con margen, sin estirarse */
+    .theme-switch {
+      margin: 10px auto 0;
+      display: inline-flex;
+      max-width: 92%;
+    }
     .proj-row, .proj-row.reverse { gap: 16px; margin-bottom: 22px; }
     .media-frame { width: 92%; max-width: 320px; }
     .app-title { font-size: 26px; }
@@ -295,6 +308,7 @@
 
         <article class="card-xl about-card">
           <h3 class="about-title">About</h3>
+          <p class="muted">(Built while working at a previous employer; my name is not publicly shown on the store listing.)</p>
           <p class="about-p">iOS app that helps estimate child support payments aligned with Texas state guidelines.</p>
           <h4>A few basic features</h4>
           <div class="tags">
@@ -315,6 +329,7 @@
       <div class="proj-row reverse">
         <article class="card-xl about-card">
           <h3 class="about-title">About</h3>
+          <p class="muted">(Built while working at a previous employer; my name is not publicly shown on the store listing.)</p>
           <p class="about-p">News and live streaming app for a local TV station with categories, feeds and media playback.</p>
           <h4>A few basic features</h4>
           <div class="tags">
@@ -376,6 +391,7 @@
 
         <article class="card-xl about-card">
           <h3 class="about-title">About</h3>
+          <p class="muted">(Built while working at a previous employer.)</p>
           <p class="about-p">
             AstenApp is a medical system combining an iOS client with a Laravel backend. It supports
             patient records and secure video consultations. My work focused on the iOS client and
